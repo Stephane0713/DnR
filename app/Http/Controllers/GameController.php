@@ -22,7 +22,11 @@ class GameController extends Controller
 
     public function show($id)
     {
-        return view('games.show', ['id' => $id]);
+        $game = Game::find($id);
+
+        return view('games.show', [
+            'game' => $game,
+        ]);
     }
 
     public function create()

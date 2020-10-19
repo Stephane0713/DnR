@@ -12,4 +12,19 @@ class Game extends Model
     {
         return $this->belongsToMany('App\Genre', 'gamesgenres', 'idVideoGame', 'idGenre');
     }
+
+    public function developer()
+    {
+        return $this->hasOne('App\Developer', 'id', 'idDeveloper');
+    }
+
+    public function publisher()
+    {
+        return $this->hasOne('App\Publisher', 'id', 'idPublisher');
+    }
+
+    public function platform()
+    {
+        return $this->hasOne('App\Platform', 'id', 'idPlatform');
+    }
 }

@@ -6,7 +6,7 @@
     <div class="row">
 
         @foreach($games as $game)
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="col-12 col-md-6 col-lg-4">
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ $game->Title }}</h5>

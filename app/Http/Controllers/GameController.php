@@ -33,4 +33,18 @@ class GameController extends Controller
     {
         return view('games.create');
     }
+
+    public function store()
+    {
+        $game = new Game;
+
+        $game->Title = request('Title');
+        $game->ReleaseDate = request('ReleaseDate');
+        $game->idPlatform = request('idPlatform');
+        $game->idPublisher = request('idPublisher');
+        $game->idDeveloper = request('idDeveloper');
+
+        $game->save();
+        return redirect('/');
+    }
 }

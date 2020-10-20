@@ -22,7 +22,7 @@ class GameController extends Controller
 
     public function show($id)
     {
-        $game = Game::find($id);
+        $game = Game::findOrFail($id);
 
         return view('games.show', [
             'game' => $game,
@@ -43,8 +43,14 @@ class GameController extends Controller
         $game->idPlatform = request('idPlatform');
         $game->idPublisher = request('idPublisher');
         $game->idDeveloper = request('idDeveloper');
-
         $game->save();
-        return redirect('/');
+
+        $genres = request('genres');
+
+        foreach($genres as $genre) {
+            $game->genres()->attach($genre);
+        }
+
+        return redirect('/games');
     }
 }

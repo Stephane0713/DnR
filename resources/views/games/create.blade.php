@@ -10,6 +10,10 @@
     <input type="hidden" name="idPlatform" value="1">
     <input type="hidden" name="idPublisher" value="1">
     <input type="hidden" name="idDeveloper" value="1">
+    <input type="hidden" name="genres[]" value="1">
+    <input type="hidden" name="genres[]" value="3">
+    <input type="hidden" name="genres[]" value="4">
+
     <button class="btn btn-primary" type="submit">Send</button>
 </form>
 @endsection

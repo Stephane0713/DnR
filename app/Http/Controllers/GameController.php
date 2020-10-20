@@ -53,4 +53,19 @@ class GameController extends Controller
 
         return redirect('/games');
     }
+
+    public function destroy($id) 
+    {
+        $game = Game::findOrFail($id);
+        $game->delete();
+
+        $game->genres()->detach($id);
+
+        return redirect('/games');
+    }
+
+    public function edit()
+    {
+        return view('games.edit');
+    }
 }

@@ -15,7 +15,8 @@
 </head>
 
 <body>
-
+    <h1><a href="{{ route('games.index') }}">Index</a></h1>
+    <h1><a href="{{ route('games.create') }}">Create</a></h1>
 </body>
 
 </html>

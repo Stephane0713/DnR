@@ -64,8 +64,32 @@ class GameController extends Controller
         return redirect('/games');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('games.edit');
+        $game = Game::findOrFail($id);
+
+        return view('games.edit', [
+            'game' => $game,
+        ]);
+    }
+
+    public function update($id)
+    {
+        $game = Game::find($id);
+
+        $game->Title = request('Title');
+        $game->ReleaseDate = request('ReleaseDate');
+        $game->idPlatform = request('idPlatform');
+        $game->idPublisher = request('idPublisher');
+        $game->idDeveloper = request('idDeveloper');
+        $game->save();
+
+        $genres = request('genres');
+
+        foreach($genres as $genre) {
+            $game->genres()->sync($genre);
+        }
+
+        return redirect('/games');
     }
 }

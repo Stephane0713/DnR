@@ -23,7 +23,7 @@
                         <span class="badge badge-primary">{{ $game->platform->name }}</span>
                         <span class="badge badge-primary">{{ $game->platform->constructor->name }}</span>
                     </p>
-                    <a href="{{ route('games.show', $game->id) }}" class="btn btn-primary d-block">Modifier</a>
+                    <a href="{{ route('games.edit', $game->id) }}" class="btn btn-primary d-block">Modifier</a>
                     <form action="{{ route('games.destroy', $game->id) }}" method="post">
                         @csrf
                         @method('DELETE')

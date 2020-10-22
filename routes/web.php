@@ -29,3 +29,7 @@ Route::get('/games/{id}/edit', 'GameController@edit')->name('games.edit');
 Route::put('/games/{id}', 'GameController@update')->name('games.update');
 
 Route::delete('/games/{id}', 'GameController@destroy')->name('games.destroy');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -31,7 +31,17 @@ class GameController extends Controller
 
     public function create()
     {
-        return view('games.create');
+        $platforms = Game::getPlatforms();
+        $developers = Game::getDevelopers();    
+        $publishers = Game::getPublishers();
+        $genres = Game::getGenres();
+        
+        return view('games.create', [
+            'platforms' => $platforms,
+            'developers' => $developers,
+            'publishers' => $publishers,
+            'genres' => $genres,
+        ]);
     }
 
     public function store()

@@ -53,6 +53,10 @@
     <footer class="page-footer bg-light p-5 mt-5">
         Footer ici
     </footer>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+
 </body>
 
 </html>

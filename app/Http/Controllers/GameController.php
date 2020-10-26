@@ -78,9 +78,26 @@ class GameController extends Controller
     {
         $game = Game::findOrFail($id);
 
+        $platforms = Game::getPlatforms();
+        $developers = Game::getDevelopers();    
+        $publishers = Game::getPublishers();
+        $genres = Game::getGenres();
+
         return view('games.edit', [
             'game' => $game,
+            'platforms' => $platforms,
+            'developers' => $developers,
+            'publishers' => $publishers,
+            'genres' => $genres,
         ]);
+    }
+
+    public function get($id)
+    {
+        $game = Game::findOrFail($id);
+        $genres = $game->genres->pluck('name', 'id');
+
+        return $genres;
     }
 
     public function update($id)

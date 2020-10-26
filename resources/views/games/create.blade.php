@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 {{Form::label('ReleaseDate', 'Date de sortie')}}
-                {{Form::date('ReleaseDate', \Carbon\Carbon::now(), ['class' => 'form-control'])}}
+                {{Form::text('ReleaseDate', \Carbon\Carbon::now(), ['class' => 'form-control'])}}
             </div>
             <div class="form-group">
                 {{Form::label('idDeveloper', 'Developpeur')}}

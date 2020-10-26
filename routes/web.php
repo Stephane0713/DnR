@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 
 Route::get('/games', 'GameController@index')->name('games.index');
+Route::get('/games/{id}/get', 'GameController@get')->name('games.get');
 
 Route::get('/games/create', 'GameController@create')->name('games.create');
 Route::post('/games', 'GameController@store')->name('games.store');

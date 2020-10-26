@@ -32,10 +32,10 @@ class GameController extends Controller
     public function create()
     {
         $platforms = Game::getPlatforms();
-        $developers = Game::getDevelopers();    
+        $developers = Game::getDevelopers();
         $publishers = Game::getPublishers();
         $genres = Game::getGenres();
-        
+
         return view('games.create', [
             'platforms' => $platforms,
             'developers' => $developers,
@@ -57,14 +57,14 @@ class GameController extends Controller
 
         $genres = request('genres');
 
-        foreach($genres as $genre) {
+        foreach ($genres as $genre) {
             $game->genres()->attach($genre);
         }
 
         return redirect('/games');
     }
 
-    public function destroy($id) 
+    public function destroy($id)
     {
         $game = Game::findOrFail($id);
         $game->delete();
@@ -79,7 +79,7 @@ class GameController extends Controller
         $game = Game::findOrFail($id);
 
         $platforms = Game::getPlatforms();
-        $developers = Game::getDevelopers();    
+        $developers = Game::getDevelopers();
         $publishers = Game::getPublishers();
         $genres = Game::getGenres();
 
@@ -90,14 +90,6 @@ class GameController extends Controller
             'publishers' => $publishers,
             'genres' => $genres,
         ]);
-    }
-
-    public function get($id)
-    {
-        $game = Game::findOrFail($id);
-        $genres = $game->genres->pluck('name', 'id');
-
-        return $genres;
     }
 
     public function update($id)
@@ -113,7 +105,7 @@ class GameController extends Controller
 
         $genres = request('genres');
 
-        foreach($genres as $genre) {
+        foreach ($genres as $genre) {
             $game->genres()->sync($genre);
         }
 

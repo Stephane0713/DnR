@@ -35,7 +35,7 @@
             </div>
 
             <div id="app">
-                <genres-manager id="{{$game->id}}"></genres-manager>
+                <genres-manager id="{{$game->id}}" :genres="{{$game->genres}}"></genres-manager>
             </div>
 
             {{Form::submit('Click Me!', ['class' => 'btn btn-primary'])}}

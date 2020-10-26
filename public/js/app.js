@@ -1914,20 +1914,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      genres: null
-    };
+    return {};
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/games/' + this.id + '/get').then(function (response) {
-      return _this.genres = response.data;
-    });
-  },
-  props: ['id']
+  props: ['id', 'genres']
 });
 
 /***/ }),
@@ -37522,9 +37516,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "test" }, [
-    _c("p", [_vm._v(_vm._s(_vm.genres))])
-  ])
+  return _c(
+    "div",
+    { staticClass: "test" },
+    _vm._l(_vm.genres, function(genre) {
+      return _c("div", { key: genre.id }, [
+        _c("p", [_vm._v(_vm._s(genre.id))]),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(genre.name))])
+      ])
+    }),
+    0
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -49865,8 +49868,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\stephane\DnR\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\stephane\DnR\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\DnR\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\DnR\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

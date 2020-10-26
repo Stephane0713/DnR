@@ -1,6 +1,9 @@
 <template>
     <div class="test">
-        <p>{{genres}}</p>
+        <div v-for="genre in genres" :key="genre.id">
+            <p>{{genre.id}}</p>
+            <p>{{genre.name}}</p>
+        </div>
     </div>
 </template>
 
@@ -8,14 +11,12 @@
     export default {
         data: function() {
             return {
-                genres: null,
+
             }
         },
-        mounted () {
-            axios
-                .get('/games/'+ this.id + '/get')
-                .then(response => (this.genres = response.data))
-        },
-        props: ['id'],
+        props: [
+            'id',
+            'genres'
+        ],
     }
 </script>

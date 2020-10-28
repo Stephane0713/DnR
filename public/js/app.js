@@ -1958,14 +1958,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["genres", "platforms", "publishers", "developers", "game_genres", "game_data"],
+  created: function created() {
+    if (this.game_data) {
+      this.name = this.game_data.Title;
+      this.date = this.game_data.ReleaseDate;
+    }
+
+    if (this.game_genres) {
+      this.selectedGenres = this.game_genres;
+    }
+  },
   data: function data() {
     return {
-      name: this.game.Title,
-      date: this.game.ReleaseDate
+      name: "",
+      date: "",
+      selectedGenres: {}
     };
   },
-  props: ["genres", "platforms", "publishers", "developers", "game_genres", "game"]
+  methods: {
+    unselectGenre: function unselectGenre($event, index) {
+      console.log(this.selectedGenres[index]);
+    }
+  }
 });
 
 /***/ }),
@@ -37560,7 +37614,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("form", [
     _c("div", { staticClass: "form-group" }, [
       _c("label", { attrs: { for: "name" } }, [_vm._v("Nom")]),
       _vm._v(" "),
@@ -37579,7 +37633,7 @@ var render = function() {
         { staticClass: "form-control", attrs: { id: "platform" } },
         _vm._l(_vm.platforms, function(platform, id) {
           return _c("option", { key: id, domProps: { value: id } }, [
-            _vm._v("\n        " + _vm._s(platform) + "\n      ")
+            _vm._v("\n                " + _vm._s(platform) + "\n            ")
           ])
         }),
         0
@@ -37604,7 +37658,7 @@ var render = function() {
         { staticClass: "form-control", attrs: { id: "publisher" } },
         _vm._l(_vm.publishers, function(publisher, id) {
           return _c("option", { key: id, domProps: { value: id } }, [
-            _vm._v("\n        " + _vm._s(publisher) + "\n      ")
+            _vm._v("\n                " + _vm._s(publisher) + "\n            ")
           ])
         }),
         0
@@ -37619,35 +37673,74 @@ var render = function() {
         { staticClass: "form-control", attrs: { id: "developer" } },
         _vm._l(_vm.developers, function(developer, id) {
           return _c("option", { key: id, domProps: { value: id } }, [
-            _vm._v("\n        " + _vm._s(developer) + "\n      ")
+            _vm._v("\n                " + _vm._s(developer) + "\n            ")
           ])
         }),
         0
       )
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "genres" } }, [_vm._v("Genres")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        { staticClass: "form-control", attrs: { id: "genres" } },
+        _vm._l(_vm.genres, function(genre, id) {
+          return _c("option", { key: id, domProps: { value: id } }, [
+            _vm._v("\n                " + _vm._s(genre) + "\n            ")
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "genres" }, [
+        _c("div", { staticClass: "card card-body" }, [
+          _c(
+            "div",
+            { staticClass: "row" },
+            _vm._l(_vm.selectedGenres, function(genre, index) {
+              return _c(
+                "div",
+                { key: genre.name, staticClass: "col-12 col-md_6 col-lg-4" },
+                [
+                  _c("div", { staticClass: "genres__item" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(genre.name) +
+                        "\n                            "
+                    ),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger genres__btn",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.unselectGenre($event, index)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                -\n                            "
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              )
+            }),
+            0
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
     _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", { attrs: { for: "genres" } }, [_vm._v("Genres")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { id: "genres" } },
-          _vm._l(_vm.genres, function(genre, id) {
-            return _c("option", { key: id, domProps: { value: id } }, [
-              _vm._v("\n        " + _vm._s(genre) + "\n      ")
-            ])
-          }),
-          0
-        ),
-        _vm._v(" "),
-        _vm._l(_vm.game_genres, function(genre) {
-          return _c("p", { key: genre.name }, [_vm._v(_vm._s(genre.name))])
-        })
-      ],
-      2
+      "button",
+      { staticClass: "btn btn-primary w-100", attrs: { type: "submit" } },
+      [_vm._v("Envoyer")]
     )
   ])
 }

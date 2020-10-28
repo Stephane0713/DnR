@@ -1,0 +1,11 @@
+.genres {
+    margin-top: 2em;
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+}

@@ -10903,3 +10903,15 @@ a.text-dark:focus {
   }
 }
 
+.genres {
+  margin-top: 2em;
+}
+
+.genres__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+

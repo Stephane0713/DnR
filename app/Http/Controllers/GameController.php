@@ -84,10 +84,10 @@ class GameController extends Controller
         $genres = Game::getGenres();
 
         return view('games.edit', [
-            'game' => $game,
             'platforms' => $platforms,
             'developers' => $developers,
             'publishers' => $publishers,
+            'game' => $game,
             'genres' => $genres,
         ]);
     }

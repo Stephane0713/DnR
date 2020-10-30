@@ -1,121 +1,93 @@
 <template>
-    <form>
-        <div class="form-group">
-            <label for="name">Nom</label>
-            <input type="text" name="name" :value="name" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <label for="platform">Plateforme</label>
-            <select class="form-control" id="platform">
+    <div>
+        <p>{{ addedGenres }}</p>
+        <p>{{ listGenres }}</p>
+        <div class="form-group d-flex">
+            <select name="" id="" v-model="currentGenre" class="form-control">
                 <option
-                    v-for="(platform, id) in platforms"
-                    :key="id"
-                    :value="id"
+                    :value="genre.id"
+                    v-for="genre of listGenres"
+                    :key="genre.id"
+                    >{{ genre.name }}</option
                 >
-                    {{ platform }}
-                </option>
             </select>
-        </div>
 
-        <div class="form-group">
-            <label for="release">Date de sortie</label>
-            <input
-                type="text"
-                name="release"
-                :value="date"
-                class="form-control"
-            />
+            <button
+                class="btn btn-primary ml-2"
+                v-on:click="addGenre(currentGenre)"
+            >
+                Ajouter
+            </button>
         </div>
-
-        <div class="form-group">
-            <label for="publisher">Éditeur</label>
-            <select class="form-control" id="publisher">
-                <option
-                    v-for="(publisher, id) in publishers"
-                    :key="id"
-                    :value="id"
+        <div
+            class="card card-body flex-row flex-wrap"
+            v-if="addedGenres.length > 0"
+        >
+            <div
+                class="genre d-flex align-items-center m-2"
+                v-for="genre of addedGenres"
+                :key="genre.id"
+            >
+                <div>{{ genre.name }}</div>
+                <input type="hidden" :value="genre.id" />
+                <button
+                    class="btn btn-danger ml-2"
+                    v-on:click="removeGenre(genre.id)"
                 >
-                    {{ publisher }}
-                </option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="developer">Développeur</label>
-            <select class="form-control" id="developer">
-                <option
-                    v-for="(developer, id) in developers"
-                    :key="id"
-                    :value="id"
-                >
-                    {{ developer }}
-                </option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="genres">Genres</label>
-            <select class="form-control" id="genres">
-                <option v-for="(genre, id) in genres" :key="id" :value="id">
-                    {{ genre }}
-                </option>
-            </select>
-            <div class="genres">
-                <div class="card card-body">
-                    <div class="row">
-                        <div
-                            v-for="(genre, index) in selectedGenres"
-                            :key="genre.name"
-                            class="col-12 col-md_6 col-lg-4"
-                        >
-                            <div class="genres__item">
-                                {{ genre.name }}
-                                <button
-                                    class="btn btn-danger genres__btn"
-                                    v-on:click.prevent="unselectGenre($event, index)"
-                                >
-                                    -
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    Supprimer
+                </button>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Envoyer</button>
-    </form>
+    </div>
 </template>
 
 <script>
 export default {
-    props: [
-        "genres",
-        "platforms",
-        "publishers",
-        "developers",
-        "game_genres",
-        "game_data"
-    ],
-    created() {
-        if (this.game_data) {
-            this.name = this.game_data.Title;
-            this.date = this.game_data.ReleaseDate;
+    props: {
+        allGenres: {
+            type: Array,
+            required: true
+        },
+        gameGenres: {
+            type: Array,
+            default: []
         }
-
-        if (this.game_genres) {
-            this.selectedGenres = this.game_genres;
+    },
+    created() {
+        for (let genre of this.allGenres) {
+            console.log(genre.id);
+            this.listGenres.push({ id: genre.id, name: genre.name });
         }
     },
     data: function() {
         return {
-            name: "",
-            date: "",
-            selectedGenres: {}
+            listGenres: [],
+            addedGenres: [],
+            currentGenre: null
         };
     },
     methods: {
-        unselectGenre($event, index) {
-            console.log(this.selectedGenres[index])
+        addGenre(id) {
+            if (this.listGenres.find(e => e.id == id)) {
+                this.addedGenres.push(this.listGenres.find(e => e.id == id));
+                this.listGenres.splice(
+                    this.listGenres.indexOf(
+                        this.listGenres.find(e => e.id == id)
+                    ),
+                    1
+                );
+            }
+        },
+        removeGenre(id) {
+            if (this.addedGenres.find(e => e.id == id)) {
+                this.listGenres.push(this.addedGenres.find(e => e.id == id));
+                this.addedGenres.splice(
+                    this.addedGenres.indexOf(
+                        this.addedGenres.find(e => e.id == id)
+                    ),
+                    1
+                );
+            }
         }
     }
 };

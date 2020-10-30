@@ -8,8 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div id="app">
-                <game-form :developers="{{$developers}}" :publishers="{{$publishers}}" :platforms="{{$platforms}}" :genres="{{$genres}}" :game_data="{{$game}}" :game_genres="{{$game->genres}}">
-                </game-form>
+                <game-form :all-genres="{{$genres}}" :game-genres="{{$game->genres}}" />
             </div>
         </div>
     </div>

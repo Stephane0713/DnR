@@ -1908,51 +1908,12 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -1997,27 +1958,66 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["genres", "platforms", "publishers", "developers", "game_genres", "game_data"],
-  created: function created() {
-    if (this.game_data) {
-      this.name = this.game_data.Title;
-      this.date = this.game_data.ReleaseDate;
+  props: {
+    allGenres: {
+      type: Array,
+      required: true
+    },
+    gameGenres: {
+      type: Array,
+      "default": []
     }
+  },
+  created: function created() {
+    var _iterator = _createForOfIteratorHelper(this.allGenres),
+        _step;
 
-    if (this.game_genres) {
-      this.selectedGenres = this.game_genres;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var genre = _step.value;
+        console.log(genre.id);
+        this.listGenres.push({
+          id: genre.id,
+          name: genre.name
+        });
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
     }
   },
   data: function data() {
     return {
-      name: "",
-      date: "",
-      selectedGenres: {}
+      listGenres: [],
+      addedGenres: [],
+      currentGenre: null
     };
   },
   methods: {
-    unselectGenre: function unselectGenre($event, index) {
-      console.log(this.selectedGenres[index]);
+    addGenre: function addGenre(id) {
+      if (this.listGenres.find(function (e) {
+        return e.id == id;
+      })) {
+        this.addedGenres.push(this.listGenres.find(function (e) {
+          return e.id == id;
+        }));
+        this.listGenres.splice(this.listGenres.indexOf(this.listGenres.find(function (e) {
+          return e.id == id;
+        })), 1);
+      }
+    },
+    removeGenre: function removeGenre(id) {
+      if (this.addedGenres.find(function (e) {
+        return e.id == id;
+      })) {
+        this.listGenres.push(this.addedGenres.find(function (e) {
+          return e.id == id;
+        }));
+        this.addedGenres.splice(this.addedGenres.indexOf(this.addedGenres.find(function (e) {
+          return e.id == id;
+        })), 1);
+      }
     }
   }
 });
@@ -37614,134 +37614,102 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", [
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "name" } }, [_vm._v("Nom")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "name" },
-        domProps: { value: _vm.name }
-      })
-    ]),
+  return _c("div", [
+    _c("p", [_vm._v(_vm._s(_vm.addedGenres))]),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "platform" } }, [_vm._v("Plateforme")]),
-      _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.listGenres))]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group d-flex" }, [
       _c(
         "select",
-        { staticClass: "form-control", attrs: { id: "platform" } },
-        _vm._l(_vm.platforms, function(platform, id) {
-          return _c("option", { key: id, domProps: { value: id } }, [
-            _vm._v("\n                " + _vm._s(platform) + "\n            ")
-          ])
-        }),
-        0
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "release" } }, [_vm._v("Date de sortie")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "release" },
-        domProps: { value: _vm.date }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "publisher" } }, [_vm._v("Éditeur")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        { staticClass: "form-control", attrs: { id: "publisher" } },
-        _vm._l(_vm.publishers, function(publisher, id) {
-          return _c("option", { key: id, domProps: { value: id } }, [
-            _vm._v("\n                " + _vm._s(publisher) + "\n            ")
-          ])
-        }),
-        0
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "developer" } }, [_vm._v("Développeur")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        { staticClass: "form-control", attrs: { id: "developer" } },
-        _vm._l(_vm.developers, function(developer, id) {
-          return _c("option", { key: id, domProps: { value: id } }, [
-            _vm._v("\n                " + _vm._s(developer) + "\n            ")
-          ])
-        }),
-        0
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "genres" } }, [_vm._v("Genres")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        { staticClass: "form-control", attrs: { id: "genres" } },
-        _vm._l(_vm.genres, function(genre, id) {
-          return _c("option", { key: id, domProps: { value: id } }, [
-            _vm._v("\n                " + _vm._s(genre) + "\n            ")
-          ])
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.currentGenre,
+              expression: "currentGenre"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { name: "", id: "" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.currentGenre = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.listGenres, function(genre) {
+          return _c(
+            "option",
+            { key: genre.id, domProps: { value: genre.id } },
+            [_vm._v(_vm._s(genre.name))]
+          )
         }),
         0
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "genres" }, [
-        _c("div", { staticClass: "card card-body" }, [
-          _c(
-            "div",
-            { staticClass: "row" },
-            _vm._l(_vm.selectedGenres, function(genre, index) {
-              return _c(
-                "div",
-                { key: genre.name, staticClass: "col-12 col-md_6 col-lg-4" },
-                [
-                  _c("div", { staticClass: "genres__item" }, [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(genre.name) +
-                        "\n                            "
-                    ),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger genres__btn",
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.unselectGenre($event, index)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                -\n                            "
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            }),
-            0
-          )
-        ])
-      ])
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary ml-2",
+          on: {
+            click: function($event) {
+              return _vm.addGenre(_vm.currentGenre)
+            }
+          }
+        },
+        [_vm._v("\n            Ajouter\n        ")]
+      )
     ]),
     _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "btn btn-primary w-100", attrs: { type: "submit" } },
-      [_vm._v("Envoyer")]
-    )
+    _vm.addedGenres.length > 0
+      ? _c(
+          "div",
+          { staticClass: "card card-body flex-row flex-wrap" },
+          _vm._l(_vm.addedGenres, function(genre) {
+            return _c(
+              "div",
+              {
+                key: genre.id,
+                staticClass: "genre d-flex align-items-center m-2"
+              },
+              [
+                _c("div", [_vm._v(_vm._s(genre.name))]),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "hidden" },
+                  domProps: { value: genre.id }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger ml-2",
+                    on: {
+                      click: function($event) {
+                        return _vm.removeGenre(genre.id)
+                      }
+                    }
+                  },
+                  [_vm._v("\n                Supprimer\n            ")]
+                )
+              ]
+            )
+          }),
+          0
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -50083,8 +50051,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\stephane\DnR\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\stephane\DnR\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\DnR\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\DnR\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

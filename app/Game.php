@@ -33,8 +33,8 @@ class Game extends Model
     protected static function getPlatforms()
     {
         $platforms = DB::table('platform')
-        ->select('id', 'name')
-        ->get()->pluck('name', 'id');
+            ->select('id', 'name')
+            ->get();
 
         return $platforms;
     }
@@ -42,17 +42,17 @@ class Game extends Model
     protected static function getDevelopers()
     {
         $developers = DB::table('developers')
-        ->select('id', 'name')
-        ->get()->pluck('name', 'id');
+            ->select('id', 'name')
+            ->get();
 
         return $developers;
     }
-    
+
     protected static function getPublishers()
     {
         $publishers = DB::table('publishers')
-        ->select('id', 'name')
-        ->get()->pluck('name', 'id');
+            ->select('id', 'name')
+            ->get();
 
         return $publishers;
     }
@@ -60,8 +60,8 @@ class Game extends Model
     protected static function getGenres()
     {
         $genres = DB::table('genres')
-        ->select('id', 'name')
-        ->get()->pluck('name', 'id');
+            ->select('id', 'name')
+            ->get();
 
         return $genres;
     }

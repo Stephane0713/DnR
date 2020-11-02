@@ -1,15 +1,13 @@
 <template>
-    <div>
-        <p>{{ addedGenres }}</p>
-        <p>{{ listGenres }}</p>
-        <div class="form-group d-flex">
-            <select name="" id="" v-model="currentGenre" class="form-control">
+    <form>
+        <div class="form-group d-flex" :class="{ empty: !currentGenre }">
+            <select v-model="currentGenre" class="form-control">
                 <option
                     :value="genre.id"
                     v-for="genre of listGenres"
                     :key="genre.id"
-                    >{{ genre.name }}</option
-                >
+                    >{{ genre.name }}
+                </option>
             </select>
 
             <button
@@ -19,26 +17,25 @@
                 Ajouter
             </button>
         </div>
-        <div
-            class="card card-body flex-row flex-wrap"
-            v-if="addedGenres.length > 0"
-        >
-            <div
-                class="genre d-flex align-items-center m-2"
-                v-for="genre of addedGenres"
-                :key="genre.id"
-            >
-                <div>{{ genre.name }}</div>
-                <input type="hidden" :value="genre.id" />
-                <button
-                    class="btn btn-danger ml-2"
-                    v-on:click="removeGenre(genre.id)"
+        <div class="card card-body" v-if="addedGenres.length > 0">
+            <div class="row">
+                <div
+                    class="genre d-flex align-items-center justify-content-between mb-2 col-12 col-md-6 col-lg-4"
+                    v-for="genre of addedGenres"
+                    :key="genre.id"
                 >
-                    Supprimer
-                </button>
+                    <div>{{ genre.name }}</div>
+                    <input type="hidden" :value="genre.id" />
+                    <button
+                        class="btn btn-danger"
+                        v-on:click="removeGenre(genre.id)"
+                    >
+                        Supprimer
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -50,13 +47,18 @@ export default {
         },
         gameGenres: {
             type: Array,
-            default: []
+            default: function() {
+                return [];
+            }
         }
     },
     created() {
         for (let genre of this.allGenres) {
-            console.log(genre.id);
             this.listGenres.push({ id: genre.id, name: genre.name });
+        }
+
+        for (let genre of this.gameGenres) {
+            this.addGenre(genre.id);
         }
     },
     data: function() {
@@ -69,7 +71,7 @@ export default {
     methods: {
         addGenre(id) {
             if (this.listGenres.find(e => e.id == id)) {
-                this.addedGenres.push(this.listGenres.find(e => e.id == id));
+                this.addedGenres.unshift(this.listGenres.find(e => e.id == id));
                 this.listGenres.splice(
                     this.listGenres.indexOf(
                         this.listGenres.find(e => e.id == id)
@@ -77,6 +79,7 @@ export default {
                     1
                 );
             }
+            this.currentGenre = null;
         },
         removeGenre(id) {
             if (this.addedGenres.find(e => e.id == id)) {
@@ -88,7 +91,23 @@ export default {
                     1
                 );
             }
+            this.listGenres.sort((a, b) => a.id - b.id);
+            this.currentGenre = null;
         }
     }
 };
 </script>
+
+<style>
+.empty {
+    position: relative;
+}
+
+.empty::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "Sélectionnez un genre...";
+    padding: 0.5em 1em;
+}
+</style>

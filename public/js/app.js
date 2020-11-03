@@ -2011,17 +2011,33 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    allGenres: {
-      type: Array,
+    edit: {
+      type: Boolean,
       required: true
+    },
+    game: {
+      type: Object
     },
     gameGenres: {
       type: Array,
       "default": function _default() {
         return [];
       }
+    },
+    allGenres: {
+      type: Array,
+      required: true
     },
     platforms: {
       type: Array,
@@ -2038,6 +2054,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   created: function created() {
     this.currentGenre = null;
+
+    if (this.edit) {
+      this.title = this.game.Title;
+      this.date = this.game.ReleaseDate;
+      this.platform = this.game.idPlatform;
+      this.publisher = this.game.idPublisher;
+      this.developer = this.game.idDeveloper;
+    }
 
     var _iterator = _createForOfIteratorHelper(this.allGenres),
         _step;
@@ -2076,7 +2100,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     return {
       listGenres: [],
       addedGenres: [],
-      currentGenre: null
+      currentGenre: null,
+      title: "",
+      date: "",
+      platform: "",
+      publisher: "",
+      developer: ""
     };
   },
   methods: {
@@ -38357,7 +38386,15 @@ var render = function() {
       domProps: { value: _vm.csrfToken }
     }),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "Title" } }, [_vm._v("Nom du jeu")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "Title", id: "Title" },
+        domProps: { value: _vm.title }
+      })
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", { attrs: { for: "idPlatform" } }, [_vm._v("Plateforme")]),
@@ -38379,7 +38416,17 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(1),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "ReleaseDate" } }, [
+        _vm._v("Date de sortie")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "ReleaseDate", id: "ReleaseDate" },
+        domProps: { value: _vm.date }
+      })
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", { attrs: { for: "idPublisher" } }, [_vm._v("Éditeur")]),
@@ -38531,41 +38578,12 @@ var render = function() {
     _vm._v(" "),
     _c(
       "button",
-      { staticClass: "btn btn-primary w-100", attrs: { type: "submit" } },
-      [_vm._v("Envoyer")]
+      { staticClass: "btn btn-primary w-100 mt-3", attrs: { type: "submit" } },
+      [_vm._v("\n        Envoyer\n    ")]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "Title" } }, [_vm._v("Nom du jeu")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "Title", id: "Title" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "ReleaseDate" } }, [
-        _vm._v("Date de sortie")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "ReleaseDate", id: "ReleaseDate" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

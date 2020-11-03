@@ -4,7 +4,13 @@
 
         <div class="form-group">
             <label for="Title">Nom du jeu</label>
-            <input type="text" name="Title" id="Title" class="form-control" />
+            <input
+                type="text"
+                name="Title"
+                id="Title"
+                class="form-control"
+                :value="title"
+            />
         </div>
 
         <div class="form-group">
@@ -26,6 +32,7 @@
                 name="ReleaseDate"
                 id="ReleaseDate"
                 class="form-control"
+                :value="date"
             />
         </div>
 
@@ -91,22 +98,31 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+        <button type="submit" class="btn btn-primary w-100 mt-3">
+            Envoyer
+        </button>
     </form>
 </template>
 
 <script>
 export default {
     props: {
-        allGenres: {
-            type: Array,
+        edit: {
+            type: Boolean,
             required: true
+        },
+        game: {
+            type: Object
         },
         gameGenres: {
             type: Array,
             default: function() {
                 return [];
             }
+        },
+        allGenres: {
+            type: Array,
+            required: true
         },
         platforms: {
             type: Array,
@@ -124,6 +140,14 @@ export default {
     created() {
         this.currentGenre = null;
 
+        if (this.edit) {
+            this.title = this.game.Title;
+            this.date = this.game.ReleaseDate;
+            this.platform = this.game.idPlatform;
+            this.publisher = this.game.idPublisher;
+            this.developer = this.game.idDeveloper;
+        }
+
         for (let genre of this.allGenres) {
             this.listGenres.push({ id: genre.id, name: genre.name });
         }
@@ -140,7 +164,12 @@ export default {
         return {
             listGenres: [],
             addedGenres: [],
-            currentGenre: null
+            currentGenre: null,
+            title: "",
+            date: "",
+            platform: "",
+            publisher: "",
+            developer: ""
         };
     },
     methods: {

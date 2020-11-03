@@ -1954,6 +1954,63 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     allGenres: {
@@ -1965,9 +2022,23 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       "default": function _default() {
         return [];
       }
+    },
+    platforms: {
+      type: Array,
+      required: true
+    },
+    publishers: {
+      type: Array,
+      required: true
+    },
+    developers: {
+      type: Array,
+      required: true
     }
   },
   created: function created() {
+    this.currentGenre = null;
+
     var _iterator = _createForOfIteratorHelper(this.allGenres),
         _step;
 
@@ -1998,6 +2069,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     } finally {
       _iterator2.f();
     }
+
+    this.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
   },
   data: function data() {
     return {
@@ -38278,63 +38351,138 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", [
-    _c(
-      "div",
-      { staticClass: "form-group d-flex", class: { empty: !_vm.currentGenre } },
-      [
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.currentGenre,
-                expression: "currentGenre"
+  return _c("form", { attrs: { action: "/games", method: "post" } }, [
+    _c("input", {
+      attrs: { type: "hidden", name: "_token" },
+      domProps: { value: _vm.csrfToken }
+    }),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "idPlatform" } }, [_vm._v("Plateforme")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass: "form-control",
+          attrs: { name: "idPlatform", id: "idPlatform" }
+        },
+        _vm._l(_vm.platforms, function(platform) {
+          return _c(
+            "option",
+            { key: platform.id, domProps: { value: platform.id } },
+            [_vm._v(_vm._s(platform.name) + "\n            ")]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "idPublisher" } }, [_vm._v("Éditeur")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass: "form-control",
+          attrs: { name: "idPublisher", id: "idPublisher" }
+        },
+        _vm._l(_vm.publishers, function(publisher) {
+          return _c(
+            "option",
+            { key: publisher.id, domProps: { value: publisher.id } },
+            [_vm._v(_vm._s(publisher.name) + "\n            ")]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "idDeveloper" } }, [_vm._v("Développeur")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass: "form-control",
+          attrs: { name: "idDeveloper", id: "idDeveloper" }
+        },
+        _vm._l(_vm.developers, function(developer) {
+          return _c(
+            "option",
+            { key: developer.id, domProps: { value: developer.id } },
+            [_vm._v(_vm._s(developer.name) + "\n            ")]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "genres" } }, [_vm._v("Genres")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "d-flex", class: { empty: !_vm.currentGenre } },
+        [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.currentGenre,
+                  expression: "currentGenre"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "genres" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.currentGenre = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
               }
-            ],
-            staticClass: "form-control",
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.currentGenre = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
+            },
+            _vm._l(_vm.listGenres, function(genre) {
+              return _c(
+                "option",
+                { key: genre.id, domProps: { value: genre.id } },
+                [_vm._v(_vm._s(genre.name) + "\n                ")]
+              )
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary ml-2",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.addGenre(_vm.currentGenre)
+                }
               }
-            }
-          },
-          _vm._l(_vm.listGenres, function(genre) {
-            return _c(
-              "option",
-              { key: genre.id, domProps: { value: genre.id } },
-              [_vm._v(_vm._s(genre.name) + "\n            ")]
-            )
-          }),
-          0
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary ml-2",
-            on: {
-              click: function($event) {
-                return _vm.addGenre(_vm.currentGenre)
-              }
-            }
-          },
-          [_vm._v("\n            Ajouter\n        ")]
-        )
-      ]
-    ),
+            },
+            [_vm._v("\n                Ajouter\n            ")]
+          )
+        ]
+      )
+    ]),
     _vm._v(" "),
     _vm.addedGenres.length > 0
       ? _c("div", { staticClass: "card card-body" }, [
@@ -38353,7 +38501,7 @@ var render = function() {
                   _c("div", [_vm._v(_vm._s(genre.name))]),
                   _vm._v(" "),
                   _c("input", {
-                    attrs: { type: "hidden" },
+                    attrs: { type: "hidden", name: "genres[]" },
                     domProps: { value: genre.id }
                   }),
                   _vm._v(" "),
@@ -38379,10 +38527,45 @@ var render = function() {
             0
           )
         ])
-      : _vm._e()
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "button",
+      { staticClass: "btn btn-primary w-100", attrs: { type: "submit" } },
+      [_vm._v("Envoyer")]
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "Title" } }, [_vm._v("Nom du jeu")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "Title", id: "Title" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "ReleaseDate" } }, [
+        _vm._v("Date de sortie")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "ReleaseDate", id: "ReleaseDate" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

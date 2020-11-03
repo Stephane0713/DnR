@@ -1,21 +1,77 @@
 <template>
-    <form>
-        <div class="form-group d-flex" :class="{ empty: !currentGenre }">
-            <select v-model="currentGenre" class="form-control">
+    <form action="/games" method="post">
+        <input type="hidden" :value="csrfToken" name="_token" />
+
+        <div class="form-group">
+            <label for="Title">Nom du jeu</label>
+            <input type="text" name="Title" id="Title" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="idPlatform">Plateforme</label>
+            <select name="idPlatform" id="idPlatform" class="form-control">
                 <option
-                    :value="genre.id"
-                    v-for="genre of listGenres"
-                    :key="genre.id"
-                    >{{ genre.name }}
+                    :value="platform.id"
+                    v-for="platform of platforms"
+                    :key="platform.id"
+                    >{{ platform.name }}
                 </option>
             </select>
+        </div>
 
-            <button
-                class="btn btn-primary ml-2"
-                v-on:click="addGenre(currentGenre)"
-            >
-                Ajouter
-            </button>
+        <div class="form-group">
+            <label for="ReleaseDate">Date de sortie</label>
+            <input
+                type="text"
+                name="ReleaseDate"
+                id="ReleaseDate"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="idPublisher">Éditeur</label>
+            <select name="idPublisher" id="idPublisher" class="form-control">
+                <option
+                    :value="publisher.id"
+                    v-for="publisher of publishers"
+                    :key="publisher.id"
+                    >{{ publisher.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="idDeveloper">Développeur</label>
+            <select name="idDeveloper" id="idDeveloper" class="form-control">
+                <option
+                    :value="developer.id"
+                    v-for="developer of developers"
+                    :key="developer.id"
+                    >{{ developer.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="genres">Genres</label>
+            <div class="d-flex" :class="{ empty: !currentGenre }">
+                <select v-model="currentGenre" class="form-control" id="genres">
+                    <option
+                        :value="genre.id"
+                        v-for="genre of listGenres"
+                        :key="genre.id"
+                        >{{ genre.name }}
+                    </option>
+                </select>
+
+                <button
+                    class="btn btn-primary ml-2"
+                    v-on:click.prevent="addGenre(currentGenre)"
+                >
+                    Ajouter
+                </button>
+            </div>
         </div>
         <div class="card card-body" v-if="addedGenres.length > 0">
             <div class="row">
@@ -25,7 +81,7 @@
                     :key="genre.id"
                 >
                     <div>{{ genre.name }}</div>
-                    <input type="hidden" :value="genre.id" />
+                    <input type="hidden" name="genres[]" :value="genre.id" />
                     <button
                         class="btn btn-danger"
                         v-on:click="removeGenre(genre.id)"
@@ -35,6 +91,7 @@
                 </div>
             </div>
         </div>
+        <button type="submit" class="btn btn-primary w-100">Envoyer</button>
     </form>
 </template>
 
@@ -50,9 +107,23 @@ export default {
             default: function() {
                 return [];
             }
+        },
+        platforms: {
+            type: Array,
+            required: true
+        },
+        publishers: {
+            type: Array,
+            required: true
+        },
+        developers: {
+            type: Array,
+            required: true
         }
     },
     created() {
+        this.currentGenre = null;
+
         for (let genre of this.allGenres) {
             this.listGenres.push({ id: genre.id, name: genre.name });
         }
@@ -60,6 +131,10 @@ export default {
         for (let genre of this.gameGenres) {
             this.addGenre(genre.id);
         }
+
+        this.csrfToken = document.querySelector(
+            'meta[name="csrf-token"]'
+        ).content;
     },
     data: function() {
         return {

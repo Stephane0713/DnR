@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -8,8 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div id="app">
-                <!--:developers="{{$developers}}" :publishers="{{$publishers}}" :platforms="{{$platforms}}" -->
-                <game-form :all-genres="{{$genres}}" />
+                <game-form :all-genres="{{$genres}}" :developers="{{$developers}}" :publishers="{{$publishers}}" :platforms="{{$platforms}}" />
             </div>
         </div>
     </div>

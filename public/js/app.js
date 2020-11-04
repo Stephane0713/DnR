@@ -2020,6 +2020,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     edit: {
@@ -38402,8 +38417,31 @@ var render = function() {
       _c(
         "select",
         {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.platform,
+              expression: "platform"
+            }
+          ],
           staticClass: "form-control",
-          attrs: { name: "idPlatform", id: "idPlatform" }
+          attrs: { name: "idPlatform", id: "idPlatform" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.platform = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
         },
         _vm._l(_vm.platforms, function(platform) {
           return _c(
@@ -38434,8 +38472,31 @@ var render = function() {
       _c(
         "select",
         {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.publisher,
+              expression: "publisher"
+            }
+          ],
           staticClass: "form-control",
-          attrs: { name: "idPublisher", id: "idPublisher" }
+          attrs: { name: "idPublisher", id: "idPublisher" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.publisher = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
         },
         _vm._l(_vm.publishers, function(publisher) {
           return _c(
@@ -38454,8 +38515,31 @@ var render = function() {
       _c(
         "select",
         {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.developer,
+              expression: "developer"
+            }
+          ],
           staticClass: "form-control",
-          attrs: { name: "idDeveloper", id: "idDeveloper" }
+          attrs: { name: "idDeveloper", id: "idDeveloper" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.developer = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
         },
         _vm._l(_vm.developers, function(developer) {
           return _c(

@@ -15,7 +15,12 @@
 
         <div class="form-group">
             <label for="idPlatform">Plateforme</label>
-            <select name="idPlatform" id="idPlatform" class="form-control">
+            <select
+                name="idPlatform"
+                id="idPlatform"
+                class="form-control"
+                v-model="platform"
+            >
                 <option
                     :value="platform.id"
                     v-for="platform of platforms"
@@ -38,7 +43,12 @@
 
         <div class="form-group">
             <label for="idPublisher">Éditeur</label>
-            <select name="idPublisher" id="idPublisher" class="form-control">
+            <select
+                name="idPublisher"
+                id="idPublisher"
+                class="form-control"
+                v-model="publisher"
+            >
                 <option
                     :value="publisher.id"
                     v-for="publisher of publishers"
@@ -50,7 +60,12 @@
 
         <div class="form-group">
             <label for="idDeveloper">Développeur</label>
-            <select name="idDeveloper" id="idDeveloper" class="form-control">
+            <select
+                name="idDeveloper"
+                id="idDeveloper"
+                class="form-control"
+                v-model="developer"
+            >
                 <option
                     :value="developer.id"
                     v-for="developer of developers"

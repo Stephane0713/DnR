@@ -9,7 +9,7 @@ class GameController extends Controller
 {
     public function index()
     {
-        $games = Game::paginate(15);
+        $games = Game::paginate(30)->onEachSide(0);
 
         foreach ($games as $game) {
             $game->ReleaseDate = $game->ReleaseDate ?: 'N/C';

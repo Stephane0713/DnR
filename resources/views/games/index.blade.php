@@ -23,6 +23,10 @@
         @endforeach
 
     </div>
+    <div class="d-flex justify-content-center">
+        {{ $games->appends(['sort' => 'id'])->render() }}
+    </div>
+
 </div>
 
 @endsection

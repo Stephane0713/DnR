@@ -1,7 +1,5 @@
 <template>
-    <form action="/games" method="post">
-        <input type="hidden" :value="csrfToken" name="_token" />
-
+    <div>
         <div class="form-group">
             <label for="Title">Nom du jeu</label>
             <input
@@ -116,7 +114,7 @@
         <button type="submit" class="btn btn-primary w-100 mt-3">
             Envoyer
         </button>
-    </form>
+    </div>
 </template>
 
 <script>
@@ -170,10 +168,6 @@ export default {
         for (let genre of this.gameGenres) {
             this.addGenre(genre.id);
         }
-
-        this.csrfToken = document.querySelector(
-            'meta[name="csrf-token"]'
-        ).content;
     },
     data: function() {
         return {

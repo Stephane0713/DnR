@@ -7,9 +7,11 @@
 
     <div class="row">
         <div class="col-12">
-            <div id="app">
+            <form id="app" action="{{ route('games.update', $game->id) }}" method="POST">
+                @csrf
+                @method('PUT')
                 <game-form :edit="true" :all-genres="{{$genres}}" :game="{{$game}}" :game-genres="{{$game->genres}}" :developers="{{$developers}}" :publishers="{{$publishers}}" :platforms="{{$platforms}}" />
-            </div>
+            </form>
         </div>
     </div>
 </div>

@@ -7,9 +7,10 @@
 
     <div class="row">
         <div class="col-12">
-            <div id="app">
+            <form id="app" action="{{ route('games.store') }}" method="POST">
+                @csrf
                 <game-form :edit="false" :all-genres="{{$genres}}" :developers="{{$developers}}" :publishers="{{$publishers}}" :platforms="{{$platforms}}" />
-            </div>
+            </form>
         </div>
     </div>
 </div>

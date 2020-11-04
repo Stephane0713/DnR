@@ -2033,8 +2033,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     edit: {
@@ -2108,8 +2106,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     } finally {
       _iterator2.f();
     }
-
-    this.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
   },
   data: function data() {
     return {
@@ -38395,12 +38391,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", { attrs: { action: "/games", method: "post" } }, [
-    _c("input", {
-      attrs: { type: "hidden", name: "_token" },
-      domProps: { value: _vm.csrfToken }
-    }),
-    _vm._v(" "),
+  return _c("div", [
     _c("div", { staticClass: "form-group" }, [
       _c("label", { attrs: { for: "Title" } }, [_vm._v("Nom du jeu")]),
       _vm._v(" "),

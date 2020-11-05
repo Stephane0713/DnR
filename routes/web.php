@@ -31,6 +31,10 @@ Route::put('/games/{id}', 'GameController@update')->name('games.update');
 
 Route::delete('/games/{id}', 'GameController@destroy')->name('games.destroy');
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+]);
 
 Route::get('/home', 'HomeController@index')->name('home');

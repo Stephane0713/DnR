@@ -9,15 +9,20 @@ class GameController extends Controller
 {
     public function index()
     {
-        $games = Game::paginate(30)->onEachSide(0);
+        return view('games.index');
+    }
+
+    public function get()
+    {
+        $name = request('name');
+        $games = Game::where('Title', 'like', '%' . $name . '%')->paginate(20);
 
         foreach ($games as $game) {
             $game->ReleaseDate = $game->ReleaseDate ?: 'N/C';
+            $game->genres = $game->genres()->get();
         }
 
-        return view('games.index', [
-            'games' => $games,
-        ]);
+        return $games;
     }
 
     public function show($id)

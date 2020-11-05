@@ -17,6 +17,8 @@
 <body>
     <h1><a href="{{ route('games.index') }}">Index</a></h1>
     <h1><a href="{{ route('games.create') }}">Create</a></h1>
+    <p>Email : admin@admin.fr</p>
+    <p>Password : admin123</p>
 </body>
 
 </html>

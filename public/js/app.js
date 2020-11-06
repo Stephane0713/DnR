@@ -2233,6 +2233,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.getGames();
@@ -38864,8 +38886,8 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c("span", { staticClass: "page-link text-dark" }, [
+          _c("li", { staticClass: "page-item disabled" }, [
+            _c("a", { staticClass: "page-link text-dark" }, [
               _vm._v(
                 "Page " +
                   _vm._s(_vm.data.current_page) +
@@ -38898,35 +38920,87 @@ var render = function() {
               )
             ]
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _vm.games.length > 1
+          ? _c("div", { staticClass: "alert alert-success" }, [
+              _vm._v(
+                "\n                Nombre de résultats : " +
+                  _vm._s(_vm.data.total) +
+                  ",\n                " +
+                  _vm._s(_vm.games.length) +
+                  " sur cette page.\n            "
+              )
+            ])
+          : _c("div", { staticClass: "alert alert-warning" }, [
+              _vm._v("\n                Aucun résultat\n            ")
+            ])
       ])
     ]),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
-      [
-        _vm._l(_vm.games, function(game) {
-          return _c(
-            "div",
-            { key: game.id, staticClass: "col-12 col-md-6 col-lg-4" },
-            [
-              _c("div", { staticClass: "card card-body mb-3" }, [
-                _vm._v(_vm._s(game.Title))
-              ])
-            ]
-          )
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12" }, [
-          _vm.games.length < 1
-            ? _c("div", { staticClass: "alert alert-warning" }, [
-                _vm._v("\n                Aucun résultat\n            ")
-              ])
-            : _vm._e()
-        ])
-      ],
-      2
+      _vm._l(_vm.games, function(game) {
+        return _c(
+          "div",
+          { key: game.id, staticClass: "col-12 col-md-6 col-lg-4" },
+          [
+            _c("div", { staticClass: "card card-body mb-3" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "card-title text-truncate font--pixel",
+                  attrs: { title: game.Title }
+                },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(game.Title) +
+                      "\n                "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v(_vm._s(game.platform.name))
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "badges" },
+                _vm._l(game.genres, function(genre) {
+                  return _c(
+                    "span",
+                    {
+                      key: genre.id,
+                      staticClass: "badge badge-primary mb-2 mr-2 p-2"
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(genre.name) +
+                          "\n                    "
+                      )
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { href: "games/" + game.id }
+                },
+                [_vm._v("Details")]
+              )
+            ])
+          ]
+        )
+      }),
+      0
     )
   ])
 }

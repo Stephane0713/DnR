@@ -28,10 +28,10 @@
                             >Prev</a
                         >
                     </li>
-                    <li class="page-item">
-                        <span class="page-link text-dark"
+                    <li class="page-item disabled">
+                        <a class="page-link text-dark"
                             >Page {{ data.current_page }} sur
-                            {{ data.last_page }}</span
+                            {{ data.last_page }}</a
                         >
                     </li>
                     <li
@@ -46,6 +46,13 @@
                         >
                     </li>
                 </ul>
+                <div v-if="games.length > 1" class="alert alert-success">
+                    Nombre de résultats : {{ data.total }},
+                    {{ games.length }} sur cette page.
+                </div>
+                <div class="alert alert-warning" v-else>
+                    Aucun résultat
+                </div>
             </nav>
         </div>
         <div class="row">
@@ -54,12 +61,27 @@
                 v-for="game of games"
                 :key="game.id"
             >
-                <div class="card card-body mb-3">{{ game.Title }}</div>
-            </div>
-            <div class="col-12">
-                <!--En attendant-->
-                <div class="alert alert-warning" v-if="games.length < 1">
-                    Aucun résultat
+                <div class="card card-body mb-3">
+                    <h5
+                        :title="game.Title"
+                        class="card-title text-truncate font--pixel"
+                    >
+                        {{ game.Title }}
+                    </h5>
+                    <p class="card-text">{{ game.platform.name }}</p>
+                    <div class="badges">
+                        <span
+                            v-for="genre of game.genres"
+                            :key="genre.id"
+                            class="badge badge-primary mb-2 mr-2 p-2"
+                        >
+                            {{ genre.name }}
+                        </span>
+                    </div>
+                    <!--Je dois trouver comment passer name('games.show') à la place de games/+game.id-->
+                    <a :href="'games/' + game.id" class="btn btn-primary"
+                        >Details</a
+                    >
                 </div>
             </div>
         </div>

@@ -20,6 +20,7 @@ class GameController extends Controller
         foreach ($games as $game) {
             $game->ReleaseDate = $game->ReleaseDate ?: 'N/C';
             $game->genres = $game->genres()->get();
+            $game->platform = $game->platform()->first();
         }
 
         return $games;

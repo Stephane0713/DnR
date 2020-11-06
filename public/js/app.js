@@ -2213,6 +2213,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.getGames();
@@ -2241,6 +2261,18 @@ __webpack_require__.r(__webpack_exports__);
     searchGames: function searchGames() {
       this.page = 1;
       this.getGames();
+    },
+    nextPage: function nextPage() {
+      if (this.page < this.data.last_page) {
+        this.page++;
+        this.getGames();
+      }
+    },
+    prevPage: function prevPage() {
+      if (this.page > 1) {
+        this.page--;
+        this.getGames();
+      }
     }
   }
 });
@@ -38806,37 +38838,67 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "formControlRange" } }, [
-          _vm._v("Example Range input")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
+      _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.page,
-              expression: "page"
-            }
-          ],
-          staticClass: "form-control-range",
-          attrs: {
-            type: "range",
-            min: "1",
-            max: _vm.data.last_page,
-            id: "formControlRange"
-          },
-          domProps: { value: _vm.page },
-          on: {
-            change: function($event) {
-              return _vm.getGames()
+              staticClass: "page-item",
+              class: { disabled: !_vm.data.prev_page_url }
             },
-            __r: function($event) {
-              _vm.page = $event.target.value
-            }
-          }
-        })
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.prevPage()
+                    }
+                  }
+                },
+                [_vm._v("Prev")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c("span", { staticClass: "page-link text-dark" }, [
+              _vm._v(
+                "Page " +
+                  _vm._s(_vm.data.current_page) +
+                  " sur\n                        " +
+                  _vm._s(_vm.data.last_page)
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: { disabled: !_vm.data.next_page_url }
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.nextPage()
+                    }
+                  }
+                },
+                [_vm._v("Next")]
+              )
+            ]
+          )
+        ])
       ])
     ]),
     _vm._v(" "),

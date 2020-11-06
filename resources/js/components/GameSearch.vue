@@ -15,18 +15,38 @@
                     v-model="search"
                 />
             </div>
-            <div class="form-group">
-                <label for="formControlRange">Example Range input</label>
-                <input
-                    type="range"
-                    min="1"
-                    :max="data.last_page"
-                    class="form-control-range"
-                    id="formControlRange"
-                    @change="getGames()"
-                    v-model="page"
-                />
-            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li
+                        class="page-item"
+                        :class="{ disabled: !data.prev_page_url }"
+                    >
+                        <a
+                            class="page-link"
+                            href="#"
+                            @click.prevent="prevPage()"
+                            >Prev</a
+                        >
+                    </li>
+                    <li class="page-item">
+                        <span class="page-link text-dark"
+                            >Page {{ data.current_page }} sur
+                            {{ data.last_page }}</span
+                        >
+                    </li>
+                    <li
+                        class="page-item"
+                        :class="{ disabled: !data.next_page_url }"
+                    >
+                        <a
+                            class="page-link"
+                            href="#"
+                            @click.prevent="nextPage()"
+                            >Next</a
+                        >
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div class="row">
             <div
@@ -78,6 +98,18 @@ export default {
         searchGames() {
             this.page = 1;
             this.getGames();
+        },
+        nextPage() {
+            if (this.page < this.data.last_page) {
+                this.page++;
+                this.getGames();
+            }
+        },
+        prevPage() {
+            if (this.page > 1) {
+                this.page--;
+                this.getGames();
+            }
         }
     }
 };

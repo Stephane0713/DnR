@@ -20,15 +20,15 @@ Route::get('/', function () {
 
 Route::get('/games', 'GameController@index')->name('games.index');
 
-Route::get('/games/create', 'GameController@create')->name('games.create');
-Route::post('/games', 'GameController@store')->name('games.store');
+Route::get('/games/create', 'GameController@create')->middleware('auth')->name('games.create');
+Route::post('/games', 'GameController@store')->middleware('auth')->name('games.store');
 
 Route::get('/games/{id}', 'GameController@show')->name('games.show');
 
-Route::get('/games/{id}/edit', 'GameController@edit')->name('games.edit');
-Route::put('/games/{id}', 'GameController@update')->name('games.update');
+Route::get('/games/{id}/edit', 'GameController@edit')->middleware('auth')->name('games.edit');
+Route::put('/games/{id}', 'GameController@update')->middleware('auth')->name('games.update');
 
-Route::delete('/games/{id}', 'GameController@destroy')->name('games.destroy');
+Route::delete('/games/{id}', 'GameController@destroy')->middleware('auth')->name('games.destroy');
 
 Auth::routes([
     'register' => false,

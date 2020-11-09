@@ -1,76 +1,91 @@
 <template>
     <div>
-        <div class="form-group">
-            <label for="Title">Nom du jeu</label>
-            <input
-                type="text"
-                name="Title"
-                id="Title"
-                class="form-control"
-                :value="title"
-            />
-        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="Title">Nom du jeu</label>
+                    <input
+                        type="text"
+                        name="Title"
+                        id="Title"
+                        class="form-control"
+                        v-model="title"
+                    />
+                </div>
 
-        <div class="form-group">
-            <label for="idPlatform">Plateforme</label>
-            <select
-                name="idPlatform"
-                id="idPlatform"
-                class="form-control"
-                v-model="platform"
-            >
-                <option
-                    :value="platform.id"
-                    v-for="platform of platforms"
-                    :key="platform.id"
-                    >{{ platform.name }}
-                </option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label for="idPlatform">Plateforme</label>
+                    <select
+                        name="idPlatform"
+                        id="idPlatform"
+                        class="form-control"
+                        v-model="platform"
+                    >
+                        <option
+                            :value="platform.id"
+                            v-for="platform of platforms"
+                            :key="platform.id"
+                            >{{ platform.name }}
+                        </option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-            <label for="ReleaseDate">Date de sortie</label>
-            <input
-                type="text"
-                name="ReleaseDate"
-                id="ReleaseDate"
-                class="form-control"
-                :value="date"
-            />
-        </div>
+                <div class="form-group">
+                    <label for="ReleaseDate">Date de sortie</label>
+                    <input
+                        type="text"
+                        name="ReleaseDate"
+                        id="ReleaseDate"
+                        class="form-control"
+                        v-model="date"
+                    />
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="idPublisher">Éditeur</label>
+                    <select
+                        name="idPublisher"
+                        id="idPublisher"
+                        class="form-control"
+                        v-model="publisher"
+                    >
+                        <option
+                            :value="publisher.id"
+                            v-for="publisher of publishers"
+                            :key="publisher.id"
+                            >{{ publisher.name }}
+                        </option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-            <label for="idPublisher">Éditeur</label>
-            <select
-                name="idPublisher"
-                id="idPublisher"
-                class="form-control"
-                v-model="publisher"
-            >
-                <option
-                    :value="publisher.id"
-                    v-for="publisher of publishers"
-                    :key="publisher.id"
-                    >{{ publisher.name }}
-                </option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label for="idDeveloper">Développeur</label>
+                    <select
+                        name="idDeveloper"
+                        id="idDeveloper"
+                        class="form-control"
+                        v-model="developer"
+                    >
+                        <option
+                            :value="developer.id"
+                            v-for="developer of developers"
+                            :key="developer.id"
+                            >{{ developer.name }}
+                        </option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-            <label for="idDeveloper">Développeur</label>
-            <select
-                name="idDeveloper"
-                id="idDeveloper"
-                class="form-control"
-                v-model="developer"
-            >
-                <option
-                    :value="developer.id"
-                    v-for="developer of developers"
-                    :key="developer.id"
-                    >{{ developer.name }}
-                </option>
-            </select>
+                <div class="form-group">
+                    <label for="stock">En stock</label>
+                    <input
+                        type="text"
+                        name="stock"
+                        id="stock"
+                        class="form-control"
+                    />
+                </div>
+            </div>
         </div>
 
         <div class="form-group">

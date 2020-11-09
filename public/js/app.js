@@ -2033,6 +2033,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     edit: {
@@ -38537,155 +38552,197 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "Title" } }, [_vm._v("Nom du jeu")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "Title", id: "Title" },
-        domProps: { value: _vm.title }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "idPlatform" } }, [_vm._v("Plateforme")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 col-md-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "Title" } }, [_vm._v("Nom du jeu")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.title,
+                expression: "title"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "Title", id: "Title" },
+            domProps: { value: _vm.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.title = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "idPlatform" } }, [_vm._v("Plateforme")]),
+          _vm._v(" "),
+          _c(
+            "select",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.platform,
-              expression: "platform"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "idPlatform", id: "idPlatform" },
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.platform = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        _vm._l(_vm.platforms, function(platform) {
-          return _c(
-            "option",
-            { key: platform.id, domProps: { value: platform.id } },
-            [_vm._v(_vm._s(platform.name) + "\n            ")]
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.platform,
+                  expression: "platform"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { name: "idPlatform", id: "idPlatform" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.platform = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.platforms, function(platform) {
+              return _c(
+                "option",
+                { key: platform.id, domProps: { value: platform.id } },
+                [_vm._v(_vm._s(platform.name) + "\n                    ")]
+              )
+            }),
+            0
           )
-        }),
-        0
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "ReleaseDate" } }, [
-        _vm._v("Date de sortie")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "ReleaseDate" } }, [
+            _vm._v("Date de sortie")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.date,
+                expression: "date"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "ReleaseDate", id: "ReleaseDate" },
+            domProps: { value: _vm.date },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.date = $event.target.value
+              }
+            }
+          })
+        ])
       ]),
       _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "ReleaseDate", id: "ReleaseDate" },
-        domProps: { value: _vm.date }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "idPublisher" } }, [_vm._v("Éditeur")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
+      _c("div", { staticClass: "col-12 col-md-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "idPublisher" } }, [_vm._v("Éditeur")]),
+          _vm._v(" "),
+          _c(
+            "select",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.publisher,
-              expression: "publisher"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "idPublisher", id: "idPublisher" },
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.publisher = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        _vm._l(_vm.publishers, function(publisher) {
-          return _c(
-            "option",
-            { key: publisher.id, domProps: { value: publisher.id } },
-            [_vm._v(_vm._s(publisher.name) + "\n            ")]
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.publisher,
+                  expression: "publisher"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { name: "idPublisher", id: "idPublisher" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.publisher = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.publishers, function(publisher) {
+              return _c(
+                "option",
+                { key: publisher.id, domProps: { value: publisher.id } },
+                [_vm._v(_vm._s(publisher.name) + "\n                    ")]
+              )
+            }),
+            0
           )
-        }),
-        0
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "idDeveloper" } }, [_vm._v("Développeur")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "idDeveloper" } }, [
+            _vm._v("Développeur")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.developer,
-              expression: "developer"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "idDeveloper", id: "idDeveloper" },
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.developer = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        _vm._l(_vm.developers, function(developer) {
-          return _c(
-            "option",
-            { key: developer.id, domProps: { value: developer.id } },
-            [_vm._v(_vm._s(developer.name) + "\n            ")]
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.developer,
+                  expression: "developer"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { name: "idDeveloper", id: "idDeveloper" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.developer = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.developers, function(developer) {
+              return _c(
+                "option",
+                { key: developer.id, domProps: { value: developer.id } },
+                [_vm._v(_vm._s(developer.name) + "\n                    ")]
+              )
+            }),
+            0
           )
-        }),
-        0
-      )
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
@@ -38803,7 +38860,21 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "stock" } }, [_vm._v("En stock")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "stock", id: "stock" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

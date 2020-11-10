@@ -61,7 +61,7 @@
                 v-for="game of games"
                 :key="game.id"
             >
-                <div class="card card-body mb-3">
+                <div class="card card-body bg-dark mb-3">
                     <h5
                         :title="game.Title"
                         class="card-title text-truncate font--pixel"

@@ -5,7 +5,7 @@
     <a class="btn btn-outline-primary mb-5" href="{{route('games.index')}}">Retour vers nos jeux</a>
     <div class="row">
         <div class="col-12">
-            <div class="card mb-3">
+            <div class="card bg-dark mb-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ $game->Title }}</h5>
                     <p class="card-text">{{ $game->ReleaseDate }}</p>

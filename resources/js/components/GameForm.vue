@@ -108,7 +108,7 @@
                 </button>
             </div>
         </div>
-        <div class="card card-body" v-if="addedGenres.length > 0">
+        <div class="card card-body bg-dark" v-if="addedGenres.length > 0">
             <div class="row">
                 <div
                     class="genre d-flex align-items-center justify-content-between mb-2 col-12 col-md-6 col-lg-4"

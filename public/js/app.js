@@ -38809,7 +38809,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _vm.addedGenres.length > 0
-      ? _c("div", { staticClass: "card card-body" }, [
+      ? _c("div", { staticClass: "card card-body bg-dark" }, [
           _c(
             "div",
             { staticClass: "row" },
@@ -39017,7 +39017,7 @@ var render = function() {
           "div",
           { key: game.id, staticClass: "col-12 col-md-6 col-lg-4" },
           [
-            _c("div", { staticClass: "card card-body mb-3" }, [
+            _c("div", { staticClass: "card card-body bg-dark mb-3" }, [
               _c(
                 "h5",
                 {
